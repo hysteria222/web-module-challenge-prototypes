@@ -19,7 +19,6 @@ function Person(name, age) {
 this.name = name;
 this.age = age;
 this.stomach = [];
-this.someFood = ' ';
 }
 Person.prototype.toString = function (){
   return `${this.name}, ${this.age}.`
@@ -31,9 +30,9 @@ Person.prototype.poop = function (){
   }
 }
 
-Person.prototype.eat = function (){
+Person.prototype.eat = function (someFood){
   if(this.eat){
-    this.stomach.push
+    this.stomach.push(someFood)
   }
   return `${this.name} ate ${this.someFood}.`
 }
@@ -69,13 +68,27 @@ this.tank = 0;
 this.odometer = 0;
 }
 Car.prototype.fill = function(gallons){
-
+this.tank = this.tank + gallons
+return gallons
 }
-Car.prototype.drive = function(){
-
+Car.prototype.drive = function(distance){
+distance = this.odometer + this.milesPerGallon;
+this.tank = this.tank - distance;
+this.odometer = this.milesPerGallon/distance
+if(this.tank < 0){
+  return `no`
+}
+if(this.tank === 0){
+  return `I ran out of fuel at ${this.odometer} miles.`
+  }
+  else{
+    return `There are ${this.tank} miles to empty.`
+  }
 }
 
-
+const crap = new Car('Ford Fiesta', 5)
+console.log(crap.fill(100))
+console.log(crap.drive(90))
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
